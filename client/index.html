@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>machine_asylum YT Tool</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/logo.jpg" class="brand-logo" alt="Logo" />
+      <div class="brand-text">
+        <div class="brand-title" data-i18n="app.title">machine_asylum YT Tool</div>
+        <div class="brand-subtitle" data-i18n="app.subtitle">Lore Randomizer</div>
+      </div>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" class="lang-btn" id="langEn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" id="langRu" data-lang="ru">RU</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button type="button" class="tab-btn active" data-tab="main" data-i18n="tabs.main">Randomizer</button>
+    <button type="button" class="tab-btn" data-tab="help" data-i18n="tabs.help">Help</button>
+  </nav>
+
+  <div id="noSequenceWarning" class="warning-banner hidden" data-i18n="source.noSequence.warning">
+    No active sequence — open a sequence in Premiere and click Refresh.
+  </div>
+
+  <main class="tab-panel" data-tab-panel="main">
+
+    <!-- ACTIONS (sticky) -->
+    <section class="card run-card sticky-run">
+      <button type="button" id="runBtn" class="btn-primary" data-i18n-title="run.hint" title="Cuts random pieces from the source bin and lays them out in the target zone using every setting below. Use as your main 'do it' button." data-i18n="run.button">Randomize &amp; Place</button>
+      <div class="run-row">
+        <button type="button" id="replaceSelectedBtn" class="btn-outline" data-i18n-title="replace.hint" title="Select clip(s) in the timeline first. Each selected clip is swapped for a different random source piece with EXACTLY the same length and position — the layout stays, only the content rerolls. Use when one specific piece doesn't fit and you don't want to redo the whole zone." data-i18n="replace.button">Replace Selected</button>
+        <button type="button" id="runNarratorBtn" class="btn-teal" data-i18n-title="narrator.button.hint" title="Scans the narrator audio track for silent pauses and fills each pause with B-roll cut to fit it exactly. Use for voiceover videos: your voice stays clear, footage covers the gaps." data-i18n="narrator.button">Fill Narrator Gaps</button>
+      </div>
+      <div id="statusLine" class="status-line hidden"></div>
+    </section>
+
+    <!-- SOURCE -->
+    <section class="card">
+      <h2 data-i18n="source.title">1. Source</h2>
+
+      <div class="frow">
+        <label for="binSelect" data-i18n="source.bin.label">Bin</label>
+        <select id="binSelect"></select>
+        <button type="button" id="refreshBtn" class="btn-secondary" data-i18n-title="source.refresh.hint" title="Re-reads bins, tracks and markers from Premiere. Click after adding footage or changing the timeline." data-i18n="source.refresh.button">&#8635;</button>
+        <button type="button" id="openWeightsBtn" class="btn-outline" data-i18n-title="source.weights.hint" title="Adjust individual video frequencies/weights for the selected bin." data-i18n="source.weights.button">&#9878;</button>
+        <span class="hint" data-i18n-title="source.bin.hint" title="Where footage is pulled from. Any bin works; one named 'Content' is pre-selected if found. The number is how many clips are inside.">?</span>
+      </div>
+
+      <div class="frow">
+        <label class="checkbox">
+          <input type="checkbox" id="binRecursive" checked />
+          <span data-i18n="source.recursive.label">Include sub-bins</span>
+        </label>
+        <span class="hint" data-i18n-title="source.recursive.hint" title="Also use clips from folders nested inside the chosen bin. Leave on unless you deliberately keep unwanted footage in subfolders.">?</span>
+      </div>
+    </section>
+
+    <!-- ZONE -->
+    <section class="card">
+      <h2 data-i18n="zone.title">2. Where to place</h2>
+
+      <div class="frow">
+        <select id="zoneMode">
+          <option value="workarea" data-i18n="zone.workarea.label">Work area (In/Out bar)</option>
+          <option value="markers" data-i18n="zone.markers.label">Between named markers</option>
+          <option value="sequence" data-i18n="zone.sequence.label">Whole sequence</option>
+        </select>
+        <span class="hint" data-i18n-title="zone.hint" title="Work area: between the timeline's In/Out points — best day-to-day choice. Named markers: between two markers with the name below — good for permanent zones you reuse. Whole sequence: from 00:00 to the last clip — quick but fills everything.">?</span>
+      </div>
+      <div class="sub-field" data-show-if="zoneMode=markers">
+        <div class="frow">
+          <label for="markerName" data-i18n="zone.markerName.label">Marker name</label>
+          <input type="text" id="markerName" value="MAIN" />
+          <span class="hint" data-i18n-title="zone.markerName.hint" title="Must match the marker's name exactly, including capital letters.">?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUT STYLE -->
+    <section class="card">
+      <h2 data-i18n="cut.title">3. How to cut</h2>
+
+      <div class="frow">
+        <select id="cutMode">
+          <option value="subclip" data-i18n="cut.subclip.label">Random sub-clip</option>
+          <option value="whole" selected data-i18n="cut.whole.label">Whole clip (trim if long)</option>
+          <option value="mixed" data-i18n="cut.mixed.label">Mixed (random per clip)</option>
+        </select>
+        <span class="hint" data-i18n-title="cut.hint" title="Random sub-clip: grabs a random moment from inside each source — THE choice for long episodes/movies. Whole clip: uses clips in full, trimming only if too long — for bins of short pre-cut clips. Mixed: coin-flips between the two per piece.">?</span>
+      </div>
+
+      <div class="frow">
+        <div class="pair">
+          <label for="minSec" data-i18n="cut.minSec.label">Min (sec)</label>
+          <input type="number" id="minSec" min="0.5" step="0.5" value="2" />
+        </div>
+        <div class="pair">
+          <label for="maxSec" data-i18n="cut.maxSec.label">Max (sec)</label>
+          <input type="number" id="maxSec" min="0.5" step="0.5" value="5" />
+        </div>
+        <span class="hint" data-i18n-title="cut.range.hint" title="Every placed piece is between these lengths. 1-3s feels frantic, 3-7s is a comfortable review pace, 10s+ is calm.">?</span>
+      </div>
+
+      <div class="sub-field" data-show-if="cutMode=whole,mixed">
+        <div class="frow">
+          <label for="wholeMode" data-i18n="cut.wholeMode.label">Trim long clips</label>
+          <select id="wholeMode">
+            <option value="integerRange" data-i18n="cut.wholeMode.integerRange">Random whole seconds from range</option>
+            <option value="maxOnly" data-i18n="cut.wholeMode.maxOnly">Exactly max length</option>
+            <option value="floatRange" data-i18n="cut.wholeMode.floatRange">Random length from range</option>
+          </select>
+          <span class="hint" data-i18n-title="cut.wholeMode.hint" title="What happens when a clip is longer than Max. Whole seconds: random tidy lengths like 3s, 4s. Exactly max: every long clip becomes exactly Max — uniform rhythm. Random length: any value in range, like 3.4s — most natural.">?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILL GOAL -->
+    <section class="card">
+      <h2 data-i18n="fill.title">4. How much to place</h2>
+
+      <div class="frow">
+        <select id="fillMode">
+          <option value="fillzone" data-i18n="fill.zone.label">Fill whole zone</option>
+          <option value="percent" data-i18n="fill.percent.label">Fill zone to a percentage</option>
+          <option value="count" data-i18n="fill.count.label">Fixed number of pieces</option>
+          <option value="onepass" data-i18n="fill.onepass.label">One piece per bin clip</option>
+        </select>
+        <span class="hint" data-i18n-title="fill.hint" title="Fill whole zone: pack until nothing else fits — default. Percentage: stop at the coverage you set below — leave breathing room on purpose. Fixed number: exactly N pieces — predictable. One per clip: each source contributes once — quick overview of everything in the bin.">?</span>
+      </div>
+      <div class="sub-field" data-show-if="fillMode=percent">
+        <div class="frow">
+          <label for="fillPercentValue" data-i18n="fill.percentValue.label">Target fill</label>
+          <input type="range" id="fillPercentValue" min="5" max="100" step="5" value="70" />
+          <output id="fillPercentOut">70%</output>
+        </div>
+      </div>
+      <div class="sub-field" data-show-if="fillMode=count">
+        <div class="frow">
+          <label for="fillCountValue" data-i18n="fill.countValue.label">Piece count</label>
+          <input type="number" id="fillCountValue" min="1" step="1" value="20" />
+        </div>
+      </div>
+    </section>
+
+    <!-- AUDIO -->
+    <section class="card">
+      <h2 data-i18n="audio.title">5. Audio of placed clips</h2>
+
+      <div class="frow">
+        <select id="audioMode">
+          <option value="global" data-i18n="audio.global.label">All on / all off</option>
+          <option value="randomize" data-i18n="audio.randomize.label">Random chance per piece</option>
+          <option value="mutedlink" data-i18n="audio.mutedlink.label">Place always, but muted</option>
+        </select>
+        <span class="hint" data-i18n-title="audio.hint" title="All on/off: one switch for every piece — off is right when footage goes over a narrator. Random chance: some pieces bring their sound, per the % below — lively chaos. Place muted: audio clips are laid down but silenced — unmute individual ones later by hand.">?</span>
+      </div>
+
+      <div class="sub-field" data-show-if="audioMode=global">
+        <div class="frow">
+          <label class="checkbox">
+            <input type="checkbox" id="audioIncludeGlobal" checked />
+            <span data-i18n="audio.includeGlobal.label">Include audio</span>
+          </label>
+          <span class="hint" data-i18n-title="audio.includeGlobal.hint" title="Checked: every piece keeps its sound. Unchecked: video only — nothing lands on audio tracks.">?</span>
+        </div>
+      </div>
+
+      <div class="sub-field" data-show-if="audioMode=randomize">
+        <div class="frow">
+          <label for="audioProbability" data-i18n="audio.probability.label">Chance</label>
+          <input type="range" id="audioProbability" min="0" max="100" step="5" value="50" />
+          <output id="audioProbabilityOut">50%</output>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACKS -->
+    <section class="card">
+      <h2 data-i18n="tracks.title">6. Tracks</h2>
+
+      <div class="frow">
+        <label class="flabel" data-i18n="tracks.conflict.title">If zone has content</label>
+        <select id="conflictMode">
+          <option value="keep" data-i18n="tracks.conflict.keep.label">Keep it — use empty space only</option>
+          <option value="replace" data-i18n="tracks.conflict.replace.label">Replace it — clear and refill</option>
+        </select>
+        <span class="hint" data-i18n-title="tracks.conflict.hint" title="Keep: existing clips in the zone are untouched, new pieces squeeze into gaps — safe for topping up. Replace: the zone on target tracks is cleared first and filled fresh — use to redo a layout from scratch.">?</span>
+      </div>
+
+      <div class="frow">
+        <label class="flabel" data-i18n="tracks.playbackOverlap.title">Filling strategy</label>
+        <select id="videoPlaybackOverlap">
+          <option value="none" data-i18n="tracks.playbackOverlap.none.label">One clip at a time (no overlap)</option>
+          <option value="stack" selected data-i18n="tracks.playbackOverlap.stack.label">Every track filled to 100%</option>
+        </select>
+        <span class="hint" data-i18n-title="tracks.playbackOverlap.hint" title="One at a time: across ALL chosen tracks only one piece plays at any moment — nothing hides behind anything; tracks are just visual variety. Every track 100%: each track is packed independently, clips stack and upper tracks cover lower ones — the dense multi-track collage look.">?</span>
+      </div>
+
+      <div class="frow">
+        <label class="flabel" data-i18n="tracks.packing.title">Spacing</label>
+        <select id="videoPacking">
+          <option value="scattered" data-i18n="tracks.packing.scattered.label">Scattered — random gaps</option>
+          <option value="packed" selected data-i18n="tracks.packing.packed.label">Packed — back-to-back</option>
+        </select>
+        <span class="hint" data-i18n-title="tracks.packing.hint" title="Scattered: pieces land at random spots with natural gaps between them. Packed: pieces chain edge-to-edge with zero dead air — continuous wall of footage.">?</span>
+      </div>
+
+      <div class="frow group-head"><span data-i18n="tracks.video.title">Video tracks</span></div>
+      <div class="frow">
+        <div class="pair">
+          <label for="videoTrackAutoCount" data-i18n="tracks.autoCount.label">Use</label>
+          <input type="number" id="videoTrackAutoCount" min="1" max="10" step="1" value="2" />
+        </div>
+        <div class="pair">
+          <label for="videoTracksIgnore" data-i18n="tracks.ignore.label">Skip</label>
+          <input type="text" id="videoTracksIgnore" placeholder="1, 3" value="1" />
+        </div>
+        <span class="hint" data-i18n-title="tracks.videoCount.hint" title="Use: how many video tracks to place onto (missing ones are created). Skip: track numbers to never touch, e.g. '1' protects V1 where your main content lives.">?</span>
+      </div>
+
+      <div class="frow group-head"><span data-i18n="tracks.audio.title">Audio tracks</span></div>
+      <div class="frow">
+        <div class="pair">
+          <label for="audioTrackAutoCount" data-i18n="tracks.autoCount.label">Use</label>
+          <input type="number" id="audioTrackAutoCount" min="1" max="10" step="1" value="2" />
+        </div>
+        <div class="pair">
+          <label for="audioTracksIgnore" data-i18n="tracks.ignore.label">Skip</label>
+          <input type="text" id="audioTracksIgnore" placeholder="1, 3" value="1" />
+        </div>
+        <span class="hint" data-i18n-title="tracks.audioCount.hint" title="Same as video: how many audio tracks to use, and which numbers to never touch — e.g. '1' protects A1 with your narrator's voice.">?</span>
+      </div>
+    </section>
+
+    <!-- EXTRAS -->
+    <section class="card">
+      <h2 data-i18n="extras.title">7. Extras</h2>
+
+      <div class="frow">
+        <div class="pair">
+          <label for="seedValue" data-i18n="extras.seed.label">Seed</label>
+          <input type="number" id="seedValue" step="1" value="1" />
+        </div>
+        <button type="button" id="rerollBtn" class="btn-secondary" data-i18n-title="extras.reroll.hint" title="New seed + clears the zone + places a fresh layout in one click. Use when the whole result should be redone. (For redoing just one clip, select it and use 'Replace Selected' at the top.)" data-i18n="extras.reroll.button">Reroll All</button>
+        <span class="hint" data-i18n-title="extras.seed.hint" title="The randomness number. Same seed + same settings = identical layout, so you can reproduce a result you liked. Any change to it gives a new layout.">?</span>
+      </div>
+
+      <div class="frow">
+        <label class="checkbox">
+          <input type="checkbox" id="autoSeed" checked />
+          <span data-i18n="extras.autoSeed.label">New seed on every run</span>
+        </label>
+        <span class="hint" data-i18n-title="extras.autoSeed.hint" title="Each run rolls a fresh seed automatically — every run looks different. Turn OFF if you're tweaking settings and want the layout to stay comparable between runs.">?</span>
+      </div>
+
+      <div class="frow">
+        <div class="pair">
+          <label for="avoidRepeat" data-i18n="extras.avoidRepeat.label">Don't repeat source for N pieces</label>
+          <input type="number" id="avoidRepeat" min="0" step="1" value="1" />
+        </div>
+        <span class="hint" data-i18n-title="extras.avoidRepeat.hint" title="Number of pieces that must pass before a source can be reused. '0' means it can repeat immediately. '1' prevents back-to-back repeats.">?</span>
+      </div>
+
+      <div class="frow">
+        <label class="checkbox">
+          <input type="checkbox" id="avoidDuplicateSegments" name="avoidDuplicateSegments" value="true" checked />
+          <span data-i18n="extras.avoidDuplicateSegments.label">Avoid reusing the same time segments</span>
+        </label>
+        <span class="hint" data-i18n-title="extras.avoidDuplicateSegments.hint" title="Tries its best to pick fresh unused parts of the source video instead of picking the exact same timecode twice.">?</span>
+      </div>
+
+      <div class="sub-field" data-show-if="avoidDuplicateSegments=true">
+        <div class="pair">
+          <label for="segmentPadding" data-i18n="extras.segmentPadding.label">Segment padding (sec)</label>
+          <input type="number" id="segmentPadding" min="0" step="1" value="5" />
+        </div>
+        <span class="hint" data-i18n-title="extras.segmentPadding.hint" title="Minimum distance required between pieces taken from the same source clip. E.g. '5' ensures a new piece is at least 5 seconds away from any previously used part.">?</span>
+      </div>
+
+      <div class="frow">
+        <label class="checkbox">
+          <input type="checkbox" id="addMarkers" />
+          <span data-i18n="extras.addMarkers.label">Marker with source name per piece</span>
+        </label>
+        <span class="hint" data-i18n-title="extras.addMarkers.hint" title="Drops a timeline marker at each piece's start named after its source clip — handy for finding where footage came from while reviewing.">?</span>
+      </div>
+
+      <div class="frow">
+        <div class="pair">
+          <label for="minGapSec" data-i18n="extras.minGap.label">Min gap (sec)</label>
+          <input type="number" id="minGapSec" min="0" step="0.1" value="0" />
+        </div>
+        <span class="hint" data-i18n-title="extras.minGap.hint" title="Guaranteed empty space between neighbouring pieces (Scattered mode). 0 = pieces may touch. Ignored in Packed mode, which is gapless by definition.">?</span>
+      </div>
+
+      <div class="frow">
+        <label class="flabel" for="scaleMode" data-i18n="extras.scaleMode.label">Scaling</label>
+        <select id="scaleMode">
+          <option value="fitFrame" data-i18n="extras.scaleMode.fitFrame">Fit to frame (default)</option>
+          <option value="fitHeight" data-i18n="extras.scaleMode.fitHeight">Fit to height</option>
+          <option value="fitWidth" data-i18n="extras.scaleMode.fitWidth">Fit to width</option>
+          <option value="none" data-i18n="extras.scaleMode.none">No scaling (100%)</option>
+        </select>
+        <span class="hint" data-i18n-title="extras.scaleMode.hint" title="How each placed piece is sized to your sequence. Fit to frame: same as Premiere's 'Scale to Frame Size' — right when sources have mixed resolutions. Fit height/width: fills that dimension, may crop the other. No scaling: pixels placed 1:1.">?</span>
+      </div>
+    </section>
+
+    <!-- NARRATOR GAPS -->
+    <section class="card">
+      <h2 data-i18n="narrator.title">8. Narrator Gaps</h2>
+      <p class="card-desc" data-i18n="narrator.desc">Fills the silent pauses on a chosen audio track with B-roll cut to fit each pause exactly. Run it with the teal button at the top.</p>
+      <div class="frow">
+        <label for="narratorSource" data-i18n="narrator.source.label">Fill from</label>
+        <select id="narratorSource">
+          <option value="all" data-i18n="narrator.source.all">All bin clips (random)</option>
+        </select>
+        <span class="hint" data-i18n-title="narrator.source.hint" title="Which footage fills the gaps. 'All bin clips' picks randomly across the whole bin. Pick one specific video to fill every gap from just that clip — e.g. one long episode chopped to fit the pauses.">?</span>
+      </div>
+      <div class="frow">
+        <div class="pair">
+          <label for="narratorAudioTrack" data-i18n="narrator.audioTrack.label">Voice on A#</label>
+          <input type="number" id="narratorAudioTrack" min="1" step="1" value="1" />
+        </div>
+        <div class="pair">
+          <label for="narratorVideoTrack" data-i18n="narrator.videoTrack.label">B-roll to V#</label>
+          <input type="number" id="narratorVideoTrack" min="1" step="1" value="5" />
+        </div>
+        <span class="hint" data-i18n-title="narrator.tracks.hint" title="Voice on A#: the audio track with the narrator — its silences become the slots to fill. B-roll to V#: the video track that receives the filler footage.">?</span>
+      </div>
+    </section>
+
+  </main>
+
+  <main class="tab-panel hidden" data-tab-panel="help">
+    <section class="card">
+      <h2 data-i18n="help.title">How this works</h2>
+      <p data-i18n="help.intro">Pick a bin of footage, mark a zone on your timeline, hit Randomize. The tool cuts random pieces from the bin and scatters them across your chosen tracks.</p>
+      <ol class="help-steps">
+        <li data-i18n="help.step1">Put your footage in a bin (e.g. "Content") in this project, then pick it in Source.</li>
+        <li data-i18n="help.step2">Set a work area (In/Out) on the sequence you want to fill.</li>
+        <li data-i18n="help.step3">Hover any "?" — every control explains what it does and when to use it.</li>
+        <li data-i18n="help.step4">Click Refresh after adding clips, tracks, or markers so the panel sees them.</li>
+        <li data-i18n="help.step5">Click "Randomize &amp; Place". Don't like it? "Reroll All" redoes everything.</li>
+        <li data-i18n="help.step6">One piece bothers you? Select it in the timeline and click "Replace Selected" — same spot, same length, new content.</li>
+        <li data-i18n="help.step7">Voiceover workflow: set your voice track in section 8, then "Fill Narrator Gaps" covers only the silent pauses.</li>
+        <li data-i18n="help.step8">Click a section title to collapse it once configured — settings still apply.</li>
+      </ol>
+      <h2 data-i18n="help.undoTitle">Undo</h2>
+      <p data-i18n="help.undo">Every run is one undo step — Ctrl+Z reverts the whole thing like any other edit.</p>
+      <h2 data-i18n="help.troubleTitle">If something goes red</h2>
+      <p data-i18n="help.trackFail">If track auto-create fails on your Premiere version, add the tracks manually in the timeline and run again.</p>
+    </section>
+  </main>
+
+  <footer class="statusbar">
+    <span id="appVersionLine"></span>
+  </footer>
+
+  <!-- WEIGHTS MODAL -->
+  <div id="weightsModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h3 data-i18n="weights.title">Clip Weights & Limits</h3>
+      <p class="modal-desc" data-i18n="weights.desc">Increase a clip's weight to make it appear more often. Weight 2.0 means it is picked twice as often as 1.0.</p>
+      <div id="weightsList" class="weights-list">
+        <!-- populated by JS -->
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="weightsResetBtn" class="btn-secondary" data-i18n="weights.reset">Reset All</button>
+        <button type="button" id="weightsCloseBtn" class="btn-primary" data-i18n="weights.close">Done</button>
+      </div>
+    </div>
+  </div>
+
+<script src="js/CSInterface.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

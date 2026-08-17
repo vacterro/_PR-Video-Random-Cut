@@ -1,0 +1,1 @@
+try { var s = app.project.activeSequence; var clp = s.getSelection()[0]; var t = new Time(); t.seconds = clp.start.seconds + 1; clp.end = t; alert(trimmed to  + clp.end.seconds); } catch(e) { alert(e); }

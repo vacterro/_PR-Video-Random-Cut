@@ -1,0 +1,1 @@
+try { var s = app.project.activeSequence; var clp = s.videoTracks[2].clips[0]; var comp = clp.getMGTComponent(); var props = comp.properties; var names = ; for(var i=0; i<props.numItems; i++) { names += props[i].displayName + , ; } alert(names); } catch(e) { alert(e); }

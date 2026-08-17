@@ -1,0 +1,14 @@
+- 19.07.26 05:21 [INIT] DEC: Created SAIPEN state to plan SRT subtitle injection.
+- 19.07.26 05:24 [BUILD] DEC: Subtitles implementation complete. MOGRT bundled, srt parser added.
+- 19.07.26 05:33 [E-003] DEC: fable забирает проект у antigravity (его SRT-волна DONE, ждёт ручной тест). Новая цель юзера сверху.
+- 19.07.26 05:33 [E-004] H: .srt лезет в рандом -> isUsableClip в bins.jsx считает всё-не-бин годным, субтитры проскакивают. Fix: денилист расширений.
+- 19.07.26 05:44 [E-005] [T-101] BUILD: денилист субтитров/текста (.srt .vtt .ass .txt .csv...) в isUsableClip, ловит и по media path, и по имени.
+- 19.07.26 05:44 [E-006] [T-102] BUILD: AP_getBinClips + narratorSourceId -> narrator берёт один выбранный клип; UI-дропдаун "Fill from".
+- 19.07.26 05:44 [E-007] RUN: node verify_srt_narrator.js -> 15/15 PASS. Браузер-мок: дропдаун [all,Ep01,Ep02,Ep03], narratorSourceId=c3 дошёл до хоста.
+- 19.07.26 05:44 [E-008] H: real-Premiere caption getMediaPath -> подтверждает только живой тест. mode manual-verify, ждём юзера.
+- 19.07.26 05:52 [E-009] FIX: MOGRT component null — AP_processPendingMogrts single getMGTComponent() fails when Premiere async-init not done. Added polling loop (20×100ms $.sleep). Match: testSyncMgt.jsx pattern. by buffy.
+- 19.07.26 05:56 [E-010] FIX: MOGRT still null after polling — root cause was fragile time-based clip search (findClipAtStart ±0.5s). Would match wrong clip on crowded tracks. Stored direct clip refs in global AP_PENDING_MGT_CLIPS after importMGT(). AP_processPendingMogrts iterates refs directly. by buffy.
+- 18.08.26 00:00 [E-011] [INIT] DEC: Reinitialized SAIPEN state for GitHub push. Previous work preserved in LOG. New goal: prepare project for first GitHub push with SAIPEN protocol.
+- 18.08.26 00:00 [E-012] [T-001,T-002] BUILD: README.md + translations (EN/RU/ET) created for all 4 projects.
+- 18.08.26 00:00 [E-013] [T-004] BLOCK: Folder rename failed - file in use. Skipping T-004, moving to T-003 version updates.
+- 18.08.26 00:00 [E-014] [T-003] BUILD: Version set to 0.0.1 in manifest.xml.
