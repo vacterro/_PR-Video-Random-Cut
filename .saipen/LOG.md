@@ -1,19 +1,21 @@
 # Log
 - 19.07.26 05:21 [INIT] DEC: Created SAIPEN state to plan SRT subtitle injection.
 - 19.07.26 05:24 [BUILD] DEC: Subtitles implementation complete. MOGRT bundled, srt parser added.
-- 19.07.26 05:33 [E-003] DEC: fable Р·Р°Р±РёСЂР°РµС‚ РїСЂРѕРµРєС‚ Сѓ antigravity (РµРіРѕ SRT-РІРѕР»РЅР° DONE, Р¶РґС‘С‚ СЂСѓС‡РЅРѕР№ С‚РµСЃС‚). РќРѕРІР°СЏ С†РµР»СЊ СЋР·РµСЂР° СЃРІРµСЂС…Сѓ.
-- 19.07.26 05:33 [E-004] H: .srt Р»РµР·РµС‚ РІ СЂР°РЅРґРѕРј -> isUsableClip РІ bins.jsx СЃС‡РёС‚Р°РµС‚ РІСЃС‘-РЅРµ-Р±РёРЅ РіРѕРґРЅС‹Рј, СЃСѓР±С‚РёС‚СЂС‹ РїСЂРѕСЃРєР°РєРёРІР°СЋС‚. Fix: РґРµРЅРёР»РёСЃС‚ СЂР°СЃС€РёСЂРµРЅРёР№.
+- 19.07.26 05:33 [E-003] DEC: fable Р·Р°Р±РёСЂР°РµС‚ РїСЂРѕРµРєС‚ Сѓ antigravity.
+- 19.07.26 05:33 [E-004] H: .srt Р»РµР·РµС‚ РІ СЂР°РЅРґРѕРј -> isUsableClip. Fix: РґРµРЅРёР»РёСЃС‚ СЂР°СЃС€РёСЂРµРЅРёР№.
 - 19.07.26 05:44 [E-005] [T-101] BUILD: РґРµРЅРёР»РёСЃС‚ СЃСѓР±С‚РёС‚СЂРѕРІ/С‚РµРєСЃС‚Р° РІ isUsableClip.
-- 19.07.26 05:44 [E-006] [T-102] BUILD: AP_getBinClips + narratorSourceId -> narrator Р±РµСЂС‘С‚ РѕРґРёРЅ РІС‹Р±СЂР°РЅРЅС‹Р№ РєР»РёРї.
+- 19.07.26 05:44 [E-006] [T-102] BUILD: AP_getBinClips + narratorSourceId.
 - 19.07.26 05:44 [E-007] RUN: node verify_srt_narrator.js -> 15/15 PASS.
-- 19.07.26 05:44 [E-008] H: real-Premiere caption getMediaPath -> РїРѕРґС‚РІРµСЂР¶РґР°РµС‚ С‚РѕР»СЊРєРѕ Р¶РёРІРѕР№ С‚РµСЃС‚. mode manual-verify.
-- 19.07.26 05:52 [E-009] FIX: MOGRT component null вЂ” added polling loop. by buffy.
-- 19.07.26 05:56 [E-010] FIX: MOGRT still null вЂ” stored direct clip refs. by buffy.
-- 18.08.26 00:00 [E-011] [INIT] DEC: Reinitialized SAIPEN state for GitHub push. Previous work preserved in LOG.
-- 18.08.26 00:00 [E-012] [T-001,T-002] BUILD: README.md + translations (EN/RU/ET) created for all 4 projects.
-- 18.08.26 00:00 [E-013] [T-004] BLOCK: Folder rename failed - file in use. Skipping T-004.
+- 19.07.26 05:44 [E-008] H: real-Premiere caption getMediaPath -> mode manual-verify.
+- 19.07.26 05:52 [E-009] FIX: MOGRT component null -> polling loop. by buffy.
+- 19.07.26 05:56 [E-010] FIX: MOGRT still null -> direct clip refs. by buffy.
+- 18.08.26 00:00 [E-011] [INIT] DEC: Reinitialized SAIPEN state for GitHub push.
+- 18.08.26 00:00 [E-012] [T-001,T-002] BUILD: README.md + translations created.
+- 18.08.26 00:00 [E-013] [T-004] BLOCK: Folder rename failed - file in use.
 - 18.08.26 00:00 [E-014] [T-003] BUILD: Version set to 0.0.1 in manifest.xml.
-- 18.08.26 00:00 [E-015] [T-005,T-006] RUN: Git remote added, pushed to https://github.com/vacterro/PR-Video-Random-Cut.
-- 18.08.26 00:00 [E-016] [T-007,T-008,T-009,T-010] BUILD: LICENSE, .gitignore, CONTRIBUTING.md added. Badges added. Pushed to GitHub.
-- 18.08.26 02:00 [E-017] [HUNT] RUN: audit -> wrong identity "machine_asylum YT Tool" across manifest/i18n/install/README/index.html/host. FIX: renamed to "_PR Video Random Cut" everywhere; version 0.0.1 in i18n. Repo renamed PR-Video-Random-Cut -> _PR-Video-Random-Cut.
-- 18.08.26 02:00 [E-018] [SHIP] DEC: SAIPEN STATE/BOARD/LOG normalized to schema_version 3 (style_contract ded-4ae736e4) by opencode (handoff from devin). Committed + pushed; repo renamed on GitHub.
+- 18.08.26 00:00 [E-015] [T-005,T-006] RUN: Git remote added, pushed to vacterro/PR-Video-Random-Cut.
+- 18.08.26 00:00 [E-016] [T-007,T-008,T-009,T-010] BUILD: LICENSE, .gitignore, CONTRIBUTING.md added. Pushed.
+- 18.08.26 02:00 [E-017] [HUNT] RUN: audit -> wrong identity "machine_asylum YT Tool" across code. FIX: renamed to "_PR Video Random Cut". Repo renamed -> _PR-Video-Random-Cut.
+- 18.08.26 02:00 [E-018] [SHIP] DEC: SAIPEN STATE/BOARD/LOG normalized to schema_version 3 by opencode. Committed + pushed; repo renamed.
+- 18.08.26 02:30 [E-019] [HUNT] RUN: hunt sweep (6 signals) -> 3 findings: empty catch(e){} (host), committed .claude dir, hardcoded local paths. Tickets T-010..T-012.
+- 18.08.26 02:30 [E-020] [HUNT] DEC: STATE -> PLAN (findings logged, awaiting fix decision).

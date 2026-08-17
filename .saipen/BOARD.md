@@ -3,6 +3,9 @@
 ## DOING
 
 ## TODO
+- [ ] T-010 Silent failures: empty `catch(e){}` blocks across host/index.jsx and host/lib/*.jsx swallow errors | verify: surface errors to panel/log
+- [ ] T-011 Hygiene/leak: agent config dir `.claude/` committed | verify: add to .gitignore, untrack
+- [ ] T-012 Portability: hardcoded local absolute paths in test.jsx / encode_all.ps1 (`v:\___VAC\_PROJ\_PR\machine_asylum...`) | verify: parameterize or mark as sample
 
 ## DONE
 - [x] T-001 _PR Video Random Cut - README + EN/RU/ET translations (v0.0.1)
