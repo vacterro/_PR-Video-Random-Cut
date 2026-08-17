@@ -1,4 +1,4 @@
-# PR Video Random Cut
+# _PR Video Random Cut
 
 Adobe Premiere Pro CEP laiendus juhusliku videoklipi paigutamiseks kaalutud valikuga ja subtiitrite toega. Täidab automaatselt tühikud jadades intelligentse klipivalikuga.
 
@@ -17,7 +17,7 @@ Adobe Premiere Pro CEP laiendus juhusliku videoklipi paigutamiseks kaalutud vali
 1. Kloonige see repopositoorium
 2. Käivitage `install.bat` (Windows) või `install.ps1` (PowerShell)
 3. Taaskäivitage Adobe Premiere Pro
-4. Juurdepääs laiendusele Window > Extensions > machine_asylum YT Tool
+4. Juurdepääs laiendusele Window > Extensions > _PR Video Random Cut
 
 ## Kasutamine
 - Avage Premiere Pro projekt videoklipidega kaustades

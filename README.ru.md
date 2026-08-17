@@ -1,4 +1,4 @@
-# PR Video Random Cut
+# _PR Video Random Cut
 
 Расширение CEP Adobe Premiere Pro для случайного размещения видеоклипов с взвешенным выбором и поддержкой субтитров. Автоматически заполняет пробелы в последовательностях с интеллектуальным выбором клипов.
 
@@ -17,7 +17,7 @@
 1. Клонируйте этот репозиторий
 2. Запустите `install.bat` (Windows) или `install.ps1` (PowerShell)
 3. Перезапустите Adobe Premiere Pro
-4. Доступ к расширению через Window > Extensions > machine_asylum YT Tool
+4. Доступ к расширению через Window > Extensions > _PR Video Random Cut
 
 ## Использование
 - Откройте проект Premiere Pro с видеоклипами в бинах

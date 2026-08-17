@@ -1,9 +1,9 @@
 var AP_I18N = (function () {
   var DICTS = {
     en: {
-      "app.title": "machine_asylum YT Tool",
+      "app.title": "_PR Video Random Cut",
       "app.subtitle": "Lore Randomizer",
-      "app.versionLine": "machine_asylum YT Tool v1.1.0",
+      "app.versionLine": "_PR Video Random Cut v0.0.1",
       "tabs.main": "Randomizer",
       "tabs.help": "Help",
       "source.noSequence.warning": "No active sequence — open a sequence in Premiere and click Refresh.",
@@ -149,9 +149,9 @@ var AP_I18N = (function () {
       "help.trackFail": "If track auto-create fails on your Premiere version, add the tracks manually in the timeline and run again."
     },
     ru: {
-      "app.title": "machine_asylum YT Tool",
+      "app.title": "_PR Video Random Cut",
       "app.subtitle": "Рандомайзер отснятого",
-      "app.versionLine": "machine_asylum YT Tool v1.1.0",
+      "app.versionLine": "_PR Video Random Cut v0.0.1",
       "tabs.main": "Рандомайзер",
       "tabs.help": "Справка",
       "source.noSequence.warning": "Нет активной секвенции — откройте секвенцию в Premiere и нажмите «Обновить».",

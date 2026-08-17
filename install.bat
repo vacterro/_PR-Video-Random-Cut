@@ -1,7 +1,7 @@
 @echo off
 color 0A
 echo ===================================================
-echo machine_asylum YT Tool Installer
+echo _PR Video Random Cut Installer
 echo ===================================================
 echo.
 echo Installing panel...

@@ -83,7 +83,7 @@ function AP_runAll(paramsJsonString) {
     var clips = collectClips(binItem, !!params.bin.recursive);
     if (clips.length === 0) throw new Error("That bin has no usable clips" + (params.bin.recursive ? "" : " (try enabling 'Include sub-bins')") + ".");
 
-    try { app.beginUndoGroup("machine_asylum YT Tool"); } catch (eUndo) {}
+    try { app.beginUndoGroup("_PR Video Random Cut"); } catch (eUndo) {}
     apStartEngine(seq, clips, params);
     
     while (!AP_ENGINE.done) {
@@ -121,7 +121,7 @@ function AP_replaceSelected(paramsJsonString) {
     var clips = collectClips(binItem, !!params.bin.recursive);
     if (clips.length === 0) throw new Error("That bin has no usable clips.");
 
-    try { app.beginUndoGroup("machine_asylum YT Tool Replace Selected"); } catch (eUndo) {}
+    try { app.beginUndoGroup("_PR Video Random Cut Replace Selected"); } catch (eUndo) {}
 
     var result = apReplaceSelectedLogic(seq, clips, params);
 
@@ -144,7 +144,7 @@ function AP_processPendingMogrts(paramsJsonString) {
     var seq = app.project.activeSequence;
     if (!seq) return JSON.stringify({ ok: true }); // sequence closed?
     
-    try { app.beginUndoGroup("machine_asylum YT Tool Subtitles"); } catch(e) {}
+    try { app.beginUndoGroup("_PR Video Random Cut Subtitles"); } catch(e) {}
     
     var log = [];
     
@@ -278,7 +278,7 @@ function AP_fillNarratorGaps(paramsJsonString) {
     }
     if (clips.length === 0) throw new Error("That bin has no usable clips.");
 
-    try { app.beginUndoGroup("machine_asylum YT Tool Narrator Gaps"); } catch (eUndo) {}
+    try { app.beginUndoGroup("_PR Video Random Cut Narrator Gaps"); } catch (eUndo) {}
     
     var result = apFillNarratorGapsLogic(seq, clips, params);
 

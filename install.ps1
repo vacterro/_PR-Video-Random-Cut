@@ -1,14 +1,14 @@
-# Installs the machine_asylum YT Tool CEP panel for the current Windows user and
+# Installs the _PR Video Random Cut CEP panel for the current Windows user and
 # enables unsigned-extension debug mode (no Adobe signing cert assumed).
-# Run this, restart Premiere Pro, then open Window > Extensions > machine_asylum YT Tool.
+# Run this, restart Premiere Pro, then open Window > Extensions > _PR Video Random Cut.
 
 $ErrorActionPreference = "Stop"
 
 $sourceDir = $PSScriptRoot
 $destRoot = Join-Path $env:APPDATA "Adobe\CEP\extensions"
-$destDir = Join-Path $destRoot "machine_asylum_YT_Tool"
+$destDir = Join-Path $destRoot "_PR_Video_Random_Cut"
 
-Write-Host "Installing machine_asylum YT Tool panel..."
+Write-Host "Installing _PR Video Random Cut panel..."
 Write-Host "  Source: $sourceDir"
 Write-Host "  Target: $destDir"
 
@@ -38,4 +38,4 @@ foreach ($v in 6..20) {
 
 Write-Host ""
 Write-Host "Done. Restart Premiere Pro, then open:"
-Write-Host "  Window > Extensions > machine_asylum YT Tool"
+Write-Host "  Window > Extensions > _PR Video Random Cut"

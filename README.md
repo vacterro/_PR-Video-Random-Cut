@@ -1,4 +1,4 @@
-# PR Video Random Cut
+# _PR Video Random Cut
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Version](https://img.shields.io/badge/version-0.0.1-green.svg)
@@ -21,7 +21,7 @@ Adobe Premiere Pro CEP extension for random video clip placement with weighted s
 1. Clone this repository
 2. Run `install.bat` (Windows) or `install.ps1` (PowerShell)
 3. Restart Adobe Premiere Pro
-4. Access the extension from Window > Extensions > machine_asylum YT Tool
+4. Access the extension from Window > Extensions > _PR Video Random Cut
 
 ## Usage
 - Open a Premiere Pro project with video clips in bins

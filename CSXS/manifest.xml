@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionManifest Version="6.0"
-                    ExtensionBundleId="com.machineasylum.yttool"
+                    ExtensionBundleId="com.vacterro.prvideorandomcut"
                     ExtensionBundleVersion="0.0.1"
-                    ExtensionBundleName="machine_asylum YT Tool"
+                    ExtensionBundleName="_PR Video Random Cut"
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ExtensionList>
-    <Extension Id="com.machineasylum.yttool.panel" Version="0.0.1" />
+    <Extension Id="com.vacterro.prvideorandomcut.panel" Version="0.0.1" />
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
@@ -20,7 +20,7 @@
     </RequiredRuntimeList>
   </ExecutionEnvironment>
   <DispatchInfoList>
-    <Extension Id="com.machineasylum.yttool.panel">
+    <Extension Id="com.vacterro.prvideorandomcut.panel">
       <DispatchInfo>
         <Resources>
           <MainPath>./client/index.html</MainPath>
@@ -31,7 +31,7 @@
         </Lifecycle>
         <UI>
           <Type>Panel</Type>
-          <Menu>machine_asylum YT Tool</Menu>
+          <Menu>_PR Video Random Cut</Menu>
           <Geometry>
             <Size>
               <Height>760</Height>
