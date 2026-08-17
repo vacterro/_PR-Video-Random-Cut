@@ -2,5 +2,9 @@
 - [x] T-002 Add README translations (EN/RU/ET)
 - [x] T-003 Set version to 0.0.1 in all files
 - [ ] T-004 Rename project folder to PR-Video-Random-Cut (BLOCKED - file in use)
-- [ ] T-005 Connect to GitHub repository
-- [ ] T-006 Initial push to GitHub
+- [x] T-005 Connect to GitHub repository
+- [x] T-006 Initial push to GitHub
+- [x] T-007 Add LICENSE file (MIT License)
+- [x] T-008 Add .gitignore file
+- [x] T-009 Add CONTRIBUTING.md
+- [x] T-010 Add badges to README

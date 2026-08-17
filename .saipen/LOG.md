@@ -12,3 +12,4 @@
 - 18.08.26 00:00 [E-012] [T-001,T-002] BUILD: README.md + translations (EN/RU/ET) created for all 4 projects.
 - 18.08.26 00:00 [E-013] [T-004] BLOCK: Folder rename failed - file in use. Skipping T-004, moving to T-003 version updates.
 - 18.08.26 00:00 [E-014] [T-003] BUILD: Version set to 0.0.1 in manifest.xml.
+- 18.08.26 00:00 [E-015] [T-005,T-006] RUN: Git remote added, pushed to https://github.com/vacterro/PR-Video-Random-Cut. All tickets completed except T-004.

@@ -1,0 +1,20 @@
+# Adobe CEP specific
+.CSXSBuild/
+debug/
+.zxp/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Project specific
+*.backup
+.debug
+*.log
+
+# Test files
+test*.jsx
+test_xmp.jsx

@@ -1,5 +1,9 @@
 # PR Video Random Cut
 
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-0.0.1-green.svg)
+![Premiere Pro](https://img.shields.io/badge/Premiere%20Pro-CC%202017+-purple.svg)
+
 Adobe Premiere Pro CEP extension for random video clip placement with weighted selection and subtitle support. Automatically fills gaps in sequences with intelligent clip selection.
 
 ## Version
