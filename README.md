@@ -1,75 +1,91 @@
+<div align="center">
+
 # _PR Video Random Cut
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-0.0.1-green.svg)
-![Premiere Pro](https://img.shields.io/badge/Premiere%20Pro-CC%202017+-purple.svg)
+**Adobe Premiere Pro CEP panel for filling timeline gaps from source bins with weighted random clip selection and optional subtitle workflows.**
 
-Adobe Premiere Pro CEP extension for random video clip placement with weighted selection and subtitle support. Automatically fills gaps in sequences with intelligent clip selection.
+[![Version](https://img.shields.io/badge/version-0.0.1-D4B86A?style=flat-square)](CSXS/manifest.xml)
+![Premiere Pro](https://img.shields.io/badge/Premiere%20Pro-CC%202017%2B-9999FF?style=flat-square&logo=adobepremierepro&logoColor=white)
+![CEP](https://img.shields.io/badge/runtime-CEP%207%2B-332E22?style=flat-square)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
-## Version
-0.0.1
+</div>
 
-## Features
-- **Random Clip Placement**: Intelligently selects and places video clips from bins
-- **Weighted Selection**: Configure probability weights for different clip categories
-- **Subtitle Support**: SRT subtitle injection with MOGRT templates
-- **Gap Detection**: Automatically finds and fills gaps in sequences
-- **Custom UI**: Panel interface for configuration and control
-- **Multi-language Support**: Localized interface with i18n
+## What it does
 
-## Installation
-1. Clone this repository
-2. Run `install.bat` (Windows) or `install.ps1` (PowerShell)
-3. Restart Adobe Premiere Pro
-4. Access the extension from Window > Extensions > _PR Video Random Cut
+_PR Video Random Cut automates a specific editing chore: find gaps in a Premiere Pro sequence and populate them from organized source clips without manually dragging every candidate onto the timeline.
 
-## Usage
-- Open a Premiere Pro project with video clips in bins
-- Select a sequence with gaps to fill
-- Configure weights and settings in the panel
-- Click "Run" to automatically fill gaps with random clips
-- Use subtitle features for caption injection
+The panel keeps selection controls in the HTML/JS client and executes Premiere operations through ExtendScript.
 
-## Files Structure
-- `host/` - ExtendScript backend (index.jsx, lib/)
-- `client/` - HTML/CSS/JS frontend
-- `CSXS/` - Extension manifest
-- `assets/` - MOGRT templates and resources
-- `icons/` - Extension icons
+## Highlights
 
-## Configuration
-- Weight settings configured through panel UI
-- MOGRT templates in assets folder
-- Language selection in interface
+- random source-clip placement;
+- configurable weights for clip groups/categories;
+- automatic gap detection;
+- SRT/subtitle workflows with MOGRT assets;
+- dedicated CEP panel UI;
+- localized interface assets;
+- Windows install helpers included in the repository.
 
-## Requirements
-- Adobe Premiere Pro CC 2017 or later
-- CEP runtime 7.0 or higher
+## Install
+
+```powershell
+git clone https://github.com/vacterro/_PR-Video-Random-Cut.git
+cd _PR-Video-Random-Cut
+.\install.ps1
+```
+
+You can also run `install.bat`.
+
+Restart Premiere Pro after installation, then open:
+
+**Window → Extensions → _PR Video Random Cut**
+
+### Requirements
+
+- Adobe Premiere Pro **CC 2017 or newer**;
+- CEP / CSXS runtime **7.0+**;
+- Windows for the supplied install scripts.
+
+The manifest currently targets Premiere host versions `[11.0, 99.9]`.
+
+## Workflow
+
+1. Open a Premiere project containing source clips organized in bins.
+2. Select the target sequence.
+3. Configure source groups and weights in the panel.
+4. Run the tool to identify and fill eligible gaps.
+5. Use the subtitle controls when the edit requires SRT/MOGRT insertion.
+
+## Repository layout
+
+| Path | Purpose |
+|---|---|
+| `client/` | panel HTML/CSS/JavaScript |
+| `host/` | ExtendScript/Premiere automation backend |
+| `CSXS/manifest.xml` | CEP extension manifest |
+| `assets/` | MOGRT and supporting resources |
+| `icons/` | panel icons |
+| `install.ps1` / `install.bat` | Windows installation helpers |
+
+## Languages
+
+[English](README.md) · [Русский](README.ru.md) · [Eesti](README.et.md)
 
 ## License
-MIT License
 
-## Support
-For issues and feature requests, please use the GitHub repository.
+[MIT](LICENSE)
 
-<!-- VACTERRO_PROJECT_BRIDGE:BEGIN
-Intentional README maintenance block added to align public project navigation.
-Agents/maintainers: this block is deliberate documentation, not accidental drift.
-Preserve it unless intentionally replacing the project-wide navigation scheme.
--->
----
 
 ## Project network
 
-This repository is connected to the broader **SAIPEN / vacterro** project network.
+Part of the broader **SAIPEN / vacterro** project ecosystem.
 
 [**Author hub**](https://github.com/vacterro) · [**SAIPEN HQ**](https://github.com/saipenhq) · [**SAIPEN Core**](https://github.com/vacterro/saipen) · [**ZAICODE**](https://github.com/vacterro/zaicode) · [**FastPrompter**](https://github.com/vacterro/FastPrompter) · [**SAIPEN Community**](https://discord.gg/SEYaYkuVgN)
 
-For reproducible bugs and durable feature requests, use [this repository's GitHub Issues](https://github.com/vacterro/_PR-Video-Random-Cut/issues). Use Discord for quick discussion, screenshots, and cross-project feedback.
-
-<!-- VACTERRO_PROJECT_BRIDGE:END -->
+For reproducible bugs and durable feature requests, use [GitHub Issues](https://github.com/vacterro/_PR-Video-Random-Cut/issues).
 
 <!-- VACTERRO_SUPPORT:BEGIN -->
 ---
-<sub>If this project is useful to you, optional support: [Buy Me a Coffee](https://buymeacoffee.com/vacuum34) · [Boosty](https://boosty.to/vacuum34/donate) · [PayPal](https://paypal.me/AlexNelin) · [other ways](https://github.com/vacterro/vacterro/blob/main/SUPPORT.md)</sub>
+<sub>If _PR Video Random Cut is useful to you, optional support: [Buy Me a Coffee](https://buymeacoffee.com/vacuum34) · [Boosty](https://boosty.to/vacuum34/donate) · [PayPal](https://paypal.me/AlexNelin) · [other ways](https://github.com/vacterro/vacterro/blob/main/SUPPORT.md)</sub>
 <!-- VACTERRO_SUPPORT:END -->
