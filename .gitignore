@@ -18,3 +18,11 @@ debug/
 # Test files
 test*.jsx
 test_xmp.jsx
+
+# Adobe Premiere Pro Essential Graphics templates are Adobe-bundled assets and
+# are not redistributed here. Drop your own .mogrt from Premiere into this
+# folder if you want a template living beside the panel.
+assets/*.mogrt
+assets/*.zip
+assets/subtitle_mogrt_unzipped/
+host/assets/

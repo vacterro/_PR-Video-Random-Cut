@@ -22,7 +22,7 @@ The panel keeps selection controls in the HTML/JS client and executes Premiere o
 - random source-clip placement;
 - configurable weights for clip groups/categories;
 - automatic gap detection;
-- SRT/subtitle workflows with MOGRT assets;
+- SRT subtitle workflows, with your own MOGRT templates kept outside the repository;
 - dedicated CEP panel UI;
 - localized interface assets;
 - Windows install helpers included in the repository.
@@ -64,7 +64,7 @@ The manifest currently targets Premiere host versions `[11.0, 99.9]`.
 | `client/` | panel HTML/CSS/JavaScript |
 | `host/` | ExtendScript/Premiere automation backend |
 | `CSXS/manifest.xml` | CEP extension manifest |
-| `assets/` | MOGRT and supporting resources |
+| `assets/` | local-only slot for your own MOGRT templates (ignored by Git) |
 | `icons/` | panel icons |
 | `install.ps1` / `install.bat` | Windows installation helpers |
 
