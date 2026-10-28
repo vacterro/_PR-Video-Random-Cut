@@ -30,12 +30,12 @@ Adobe Premiere Pro CEP laiendus juhusliku videoklipi paigutamiseks kaalutud vali
 - `host/` - ExtendScript tagumine (index.jsx, lib/)
 - `client/` - HTML/CSS/JS esiosa
 - `CSXS/` - laienduse manifest
-- `assets/` - MOGRT mallid ja ressursid
+- `assets/` - kohalik kaust sinu enda MOGRT mallidele (Git ei jälgi)
 - `icons/` - laienduse ikoonid
 
 ## Konfiguratsioon
 - Kaalude seaded paneeli liidese kaudu
-- MOGRT mallid assets kaustas
+- Oma MOGRT mallid hoia assets kaustas (see on Gitist väljas)
 - Keele valik liideses
 
 ## Nõuded
